@@ -6,14 +6,9 @@
 typedef  void (*pFunction)(void);
 pFunction jumpToApplication;
 uint32_t JumpAddress;
-#define APPLICATION_ADDRESS        (uint32_t)0x08008000 
+#define APPLICATION_ADDRESS        (uint32_t)0x08008000
 
-int main(void)
-{
-  /* STM32 evalboard user initialization */
-  /* initialise LEDs and button */
-  /* STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO); */
-
+int main(void) {
   /* initialise pushbutton */
   RCC_AHB1PeriphClockCmd(SWITCH_B_CLOCK, ENABLE);
   configureDigitalInput(SWITCH_B_PORT, SWITCH_B_PIN, GPIO_PuPd_UP);
@@ -23,23 +18,30 @@ int main(void)
   configureDigitalOutput(LED_PORT, LED_RED|LED_GREEN);
   setLed(RED);
 
-  /* Flash unlock */
-  FLASH_Unlock();
+  /* /\* Flash unlock *\/ */
+  /* FLASH_Unlock(); */
   
-  if(isPushButtonPressed())
-    jumpToBootloader();
+  /* if(isPushButtonPressed()) */
+  /*   jumpToBootloader(); */
 
-  /* Check Vector Table: Test if user code is programmed starting from address 
-     "APPLICATION_ADDRESS" */
-  if(((*(__IO uint32_t*)APPLICATION_ADDRESS) & 0x2FFE0000 ) == 0x20000000){
-    /* Jump to user application */
-    JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);
-    jumpToApplication = (pFunction) JumpAddress;
-    /* Initialize user application's Stack Pointer */
-    __set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
-    jumpToApplication();
+  if(getPin(SWITCH_B_PORT, SWITCH_B_PIN)){
+    /* Check Vector Table: Test if user code is programmed starting from address 
+       "APPLICATION_ADDRESS" */
+    if(((*(__IO uint32_t*)APPLICATION_ADDRESS) & 0x2FFE0000 ) == 0x20000000){
+      setLed(GREEN);
+    }
+      /* Jump to user application */
+      JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);
+      jumpToApplication = (pFunction) JumpAddress;
+      /* Initialize user application's Stack Pointer */
+      __set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
+      jumpToApplication();
+    /* } */
+
   }
-  
+
+  jumpToBootloader();
+
   for(;;);
 }
 

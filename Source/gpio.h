@@ -12,11 +12,8 @@
    bool getPin(GPIO_TypeDef* port, uint32_t pin);
    void setPin(GPIO_TypeDef* port, uint32_t pin);
    void clearPin(GPIO_TypeDef* port, uint32_t pin);
-   void togglePin(GPIO_TypeDef* port, uint32_t pin);
    void configureDigitalInput(GPIO_TypeDef* port, uint32_t pin, GPIOPuPd_TypeDef pull);
    void configureDigitalOutput(GPIO_TypeDef* port, uint32_t pin);
-   void configureAnalogInput(GPIO_TypeDef* port, uint32_t pin);
-   void configureAnalogOutput(GPIO_TypeDef* port, uint32_t pin);
 
 #ifdef __cplusplus
 }
