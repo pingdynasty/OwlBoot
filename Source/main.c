@@ -18,12 +18,6 @@ int main(void) {
   configureDigitalOutput(LED_PORT, LED_RED|LED_GREEN);
   setLed(RED);
 
-  /* /\* Flash unlock *\/ */
-  /* FLASH_Unlock(); */
-  
-  /* if(isPushButtonPressed()) */
-  /*   jumpToBootloader(); */
-
   if(getPin(SWITCH_B_PORT, SWITCH_B_PIN)){
     /* Check Vector Table: Test if user code is programmed starting from address 
        "APPLICATION_ADDRESS" */

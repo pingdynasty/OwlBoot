@@ -12,10 +12,6 @@ void setLed(LedPin led){
   setPin(LED_PORT, led);
 }
 
-bool isPushButtonPressed(){
-  return !getPin(SWITCH_B_PORT, SWITCH_B_PIN);
-}
-
 /* Jump to the internal STM32 bootloader. The way this works is that we
  * set a magic number in memory that our startup code looks for (see startup_stm32f4xx.s).
  * RAM is preserved across system reset, so when it finds this magic number, it will go

@@ -13,7 +13,6 @@ typedef enum {
 }  LedPin;
 
 void setLed(LedPin led);
-bool isPushButtonPressed();
 
 /* Jump to the internal STM32 bootloader. The way this works is that we
  * set a magic number in memory that our startup code looks for (see startup_stm32f4xx.s).
