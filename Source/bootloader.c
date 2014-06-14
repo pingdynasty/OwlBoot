@@ -5,7 +5,7 @@
 /* Magic number to store in memory before reset to tell the device to
  * enter system bootloader.
  */
-const uint32_t bootloaderMagicNumber = 0x5EA1AB50;
+const uint32_t bootloaderMagicNumber = 0xF00B4400;
 
 void setLed(LedPin led){
   clearPin(LED_PORT, led ^ (LED_RED|LED_GREEN));
